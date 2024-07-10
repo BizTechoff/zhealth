@@ -69,6 +69,7 @@ async function startup() {
 
   // Handle webhook requests
   app.post(`/webhook/${token}`, (req, res) => {
+    console.log(`webhook called at: ${new Date()}`)
     bot.processUpdate(req.body);
     res.sendStatus(200);
   });
