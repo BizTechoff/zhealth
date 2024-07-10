@@ -18,6 +18,9 @@ const setTelegramGroupMessageWebHook = async () => {
   const url = `https://api.telegram.org/bot${token}/setWebhook`;
   const webhookUrl = `https://${cur_url}/webhook/${token}`;
 
+  console.log('url',url)
+  console.log('webhookUrl',webhookUrl)
+
   try {
 
     const key = 'scalar-api-key'
@@ -30,6 +33,7 @@ const setTelegramGroupMessageWebHook = async () => {
     });
 
     if (res.ok) {
+      console.log('json.ok:', res.statusText)
       const json = await res.json()
       console.log('json', json)
     }
@@ -44,7 +48,7 @@ const setTelegramGroupMessageWebHook = async () => {
 setTelegramGroupMessageWebHook()
 
 async function startup() {
-  console.log(`HI FROM SCALAR PORTAL SERVER. CURRENT TIME: ${new Date()}. __dirname: ${__dirname}. process.cwd(): ${process.cwd()}`)
+  console.log(`HI FROM ZHEALTH SERVER. CURRENT TIME: ${new Date()}. __dirname: ${__dirname}. process.cwd(): ${process.cwd()}`)
 
   const app = express()
   app.use(sslRedirect())
