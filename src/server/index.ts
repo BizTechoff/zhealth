@@ -4,9 +4,15 @@ import express from 'express';
 import fs from 'fs';
 import helmet from 'helmet';
 import sslRedirect from 'heroku-ssl-redirect';
-import path from 'path';
 import fetch from 'node-fetch';
+import path from 'path';
 
+const messages = new Map<
+  string /*mobile*/,
+  {
+    count: number,/*error per email*/
+    last: Date/*some links for same email*/
+  }>()
 config();
 
 const TelegramBot = require('node-telegram-bot-api');
@@ -83,6 +89,13 @@ async function startup() {
     console.log(`Message received at: ${new Date()}`);
     const chatId = msg.chat.id;
     const text = msg.text;
+    const name = msg.from.username
+
+    if (!messages.has(name){
+      messages.set(name, { count: 0, last: new Date() })
+    }
+    ++messages.get(name)!.count
+    messages.get(name)!.last = new Date()
 
     console.log(`Received message: ${text} from chatId: ${chatId}`);
 
@@ -92,6 +105,14 @@ async function startup() {
       bot.sendMessage(chatId, 'היי בנות, תזכורת: עוד 12 שעות להצטרפות לאתגר');
     } else if (text.toLowerCase() === 'תזכורת אחרונה') {
       bot.sendMessage(chatId, 'היי בנות, תזכורת: שעה אחרונה! להצטרפות לאתגר');
+    } else if (text.toLowerCase() === 'נוכחות') {
+      let text = 'סיכום'
+      text += '\n'
+      for (const m of messages) {
+        text += `${m[0]}: { הודעות: ${m[1].count}, עדכון אחרון: ${m[1].last} }`
+        text += '\n'
+      }
+      bot.sendMessage(chatId, text.trim());
     } else {
       bot.sendMessage(chatId, 'היי אני הבוט של אורלי');
     }
