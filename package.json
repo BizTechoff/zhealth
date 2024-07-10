@@ -37,6 +37,7 @@
     "heroku-ssl-redirect": "^0.1.1",
     "jsonwebtoken": "^8.5.1",
     "node-fetch": "^2.7.0",
+    "node-telegram-bot-api": "^0.66.0",
     "password-hash": "^1.2.2",
     "pg": "^8.7.3",
     "reflect-metadata": "^0.1.12",
