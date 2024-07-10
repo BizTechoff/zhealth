@@ -11,7 +11,7 @@ config();
 
 const TelegramBot = require('node-telegram-bot-api');
 const token = process.env["TELEGRAM_API_KEY"];
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(token, { polling: false }); // Disable polling
 
 const setTelegramGroupMessageWebHook = async () => {
   const cur_url = process.env['CURRENT_SERVER_URL'];
