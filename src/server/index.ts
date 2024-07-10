@@ -91,7 +91,7 @@ async function startup() {
     const text = msg.text;
     const name = msg.from.username
 
-    if (!messages.has(name){
+    if (!messages.has(name)){
       messages.set(name, { count: 0, last: new Date() })
     }
     ++messages.get(name)!.count
