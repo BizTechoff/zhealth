@@ -5,28 +5,28 @@ import fs from 'fs'
 import helmet from 'helmet'
 import sslRedirect from 'heroku-ssl-redirect'
 import path from 'path'
-import { api } from './api'
+// import { api } from './api'
 
 async function startup() {
   const app = express()
   app.use(sslRedirect())
-  app.use(
-    '/api',
-    session({
-      secret:
-        process.env['NODE_ENV'] === 'production'
-          ? process.env['SESSION_SECRET']
-          : 'my secret',
-      maxAge: 365 * 24 * 60 * 60 * 1000,
-    })
-  )
+  // app.use(
+  //   '/api',
+  //   session({
+  //     secret:
+  //       process.env['NODE_ENV'] === 'production'
+  //         ? process.env['SESSION_SECRET']
+  //         : 'my secret',
+  //     maxAge: 365 * 24 * 60 * 60 * 1000,
+  //   })
+  // )
   app.use(compression())
   app.use(helmet({ contentSecurityPolicy: false }))
 
-  app.use(api)
+  // app.use(api)
 
 
-  app.post("/api/onTelegramGroupMessage", api.withRemult, async (req, res) => {
+  app.post("/api/onTelegramGroupMessage", async (req, res) => {
     console.log(`onTelegramGroupMessage called at: ${new Date()}`)
   })
 

@@ -1,6 +1,9 @@
 {
   "name": "zhealth",
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "engines": {
+    "node": "18.x"
+  },
   "scripts": {
     "dev-web": "ng serve --proxy-config proxy.conf.json --open",
     "dev-api": "tsx watch src/server/",
