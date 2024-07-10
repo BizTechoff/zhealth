@@ -28,6 +28,7 @@ async function startup() {
 
   app.post("/api/onTelegramGroupMessage", async (req, res) => {
     console.log(`onTelegramGroupMessage called at: ${new Date()}`)
+    res.status(200).json({ success: true, error: '' });
   })
 
 
