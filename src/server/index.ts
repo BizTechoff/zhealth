@@ -15,11 +15,11 @@ const bot = new TelegramBot(token);
 const setTelegramGroupMessageWebHook = async () => {
   const cur_url = process.env['CURRENT_SERVER_URL']
   const fetch = require('node-fetch');
-  const url = `https://api.telegram.org/bot${token}/setWebhook`;
+  const url = `https://api.telegram.org/bot${token}/deleteWebhook`;//deleteWebhook
   const webhookUrl = `https://${cur_url}/webhook/${token}`;
 
-  console.log('url',url)
-  console.log('webhookUrl',webhookUrl)
+  console.log('url', url)
+  console.log('webhookUrl', webhookUrl)
 
   try {
 
@@ -76,11 +76,21 @@ async function startup() {
 
   // Respond to messages
   bot.on('message', (msg: any) => {
+    console.log(`message called at: ${new Date()}`)
     const chatId = msg.chat.id;
     const text = msg.text;
 
-    if (text.toLowerCase() === 'hello') {
-      bot.sendMessage(chatId, 'Hello! How can I help you today?');
+    if (text.toLowerCase() === 'תזכורת ראשונה') {
+      bot.sendMessage(chatId, 'היי בנות, תזכורת: עוד 24 שעות להצטרפות לאתגר');
+    }
+    else if (text.toLowerCase() === 'תזכורת שניה') {
+      bot.sendMessage(chatId, 'היי בנות, תזכורת: עוד 12 שעות להצטרפות לאתגר');
+    }
+    else if (text.toLowerCase() === 'תזכורת אחרונה') {
+      bot.sendMessage(chatId, 'היי בנות, תזכורת: שעה אחרונה! להצטרפות לאתגר');
+    }
+    else {
+      bot.sendMessage(chatId, 'היי אני הבוט של אורלי');
     }
   });
 
