@@ -16,7 +16,7 @@ const setTelegramGroupMessageWebHook = async () => {
   const cur_url = process.env['CURRENT_SERVER_URL']
   const fetch = require('node-fetch');
   const url = `https://api.telegram.org/bot${token}/setWebhook`;
-  const webhookUrl = `https://${cur_url}/webhook/${token}`;
+  const webhookUrl = `${cur_url}/webhook/${token}`;
 
   console.log('url',url)
   console.log('webhookUrl',webhookUrl)
